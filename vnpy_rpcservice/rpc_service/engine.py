@@ -68,7 +68,7 @@ class RpcEngine(BaseEngine):
         }
         save_json(self.setting_filename, setting)
 
-    def start(self, rep_address: str, pub_address: str) -> bool:
+    def start(self, rep_address: str, pub_address: str, username: str = "",  password: str = "") -> bool:
         """启动rpc服务"""
         if self.server.is_active():
             self.write_log("RPC服务运行中")
@@ -78,7 +78,7 @@ class RpcEngine(BaseEngine):
         self.pub_address = pub_address
 
         try:
-            self.server.start(rep_address, pub_address)
+            self.server.start(rep_address, pub_address, username=username, password=password)
         except:  # noqa
             msg: str = traceback.format_exc()
             self.write_log(f"RPC服务启动失败：{msg}")

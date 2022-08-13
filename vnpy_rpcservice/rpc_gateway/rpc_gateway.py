@@ -29,7 +29,9 @@ class RpcGateway(BaseGateway):
 
     default_setting: Dict[str, str] = {
         "主动请求地址": "tcp://127.0.0.1:2014",
-        "推送订阅地址": "tcp://127.0.0.1:4102"
+        "推送订阅地址": "tcp://127.0.0.1:4102",
+        "用户名": "",
+        "登录密码": ""
     }
 
     exchanges: List[Exchange] = list(Exchange)
@@ -47,9 +49,11 @@ class RpcGateway(BaseGateway):
         """连接交易接口"""
         req_address: str = setting["主动请求地址"]
         pub_address: str = setting["推送订阅地址"]
+        username: str = setting["用户名"]
+        password: str = setting["登录密码"]
 
         self.client.subscribe_topic("")
-        self.client.start(req_address, pub_address)
+        self.client.start(req_address, pub_address, username=username, password=password)
 
         self.write_log("服务器连接成功，开始初始化查询")
 

@@ -45,12 +45,21 @@ class RpcManager(QtWidgets.QWidget):
         self.pub_line: QtWidgets.QLineEdit = QtWidgets.QLineEdit(self.rpc_engine.pub_address)
         self.pub_line.setFixedWidth(300)
 
+        self.user_line = QtWidgets.QLineEdit(self.rpc_engine.rep_address)
+        self.user_line.setFixedWidth(300)
+
+        self.passwd_line = QtWidgets.QLineEdit(self.rpc_engine.pub_address)
+        self.passwd_line.setFixedWidth(300)
+
+        self.log_monitor = QtWidgets.QTextEdit()
         self.log_monitor: QtWidgets.QTextEdit = QtWidgets.QTextEdit()
         self.log_monitor.setReadOnly(True)
 
         form: QtWidgets.QFormLayout = QtWidgets.QFormLayout()
         form.addRow("请求响应地址", self.rep_line)
         form.addRow("事件广播地址", self.pub_line)
+        form.addRow("用户名", self.user_line)
+        form.addRow("登录密码", self.passwd_line)
 
         hbox: QtWidgets.QHBoxLayout = QtWidgets.QHBoxLayout()
         hbox.addLayout(form)
